@@ -12,7 +12,7 @@ public class Bullet : NetworkBehaviour
 
     public override void Spawned()
     {
-        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward * 50, ForceMode.VelocityChange);
 
         if (HasStateAuthority)
         {
