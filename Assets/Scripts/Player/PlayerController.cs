@@ -48,5 +48,11 @@ public class PlayerController : NetworkBehaviour
         {
             _movementHandler.Jump();
         }
+
+        //Granada
+        if (inputs.isgranade)
+        {
+            _shotHandler.ThrowGranade();
+        }
     }
 }
