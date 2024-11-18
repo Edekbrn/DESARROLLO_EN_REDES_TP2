@@ -35763,8 +35763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minHeight: {fileID: 866682575}
   maxHeight: {fileID: 1162791671}
-  moveSpeed: 5
-  waitTimeAtTop: 1
+  moveSpeed: 20
+  waitTimeAtTop: 0.01
 --- !u!114 &1582400301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35784,7 +35784,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 1582400300}
   - {fileID: 4990239799426983524}
-  - {fileID: 4990239799426983523}
+  - {fileID: 4990239799426983530}
   - {fileID: 4990239799426983521}
 --- !u!1001 &1582557017
 PrefabInstance:
@@ -38682,8 +38682,16 @@ PrefabInstance:
       value: -3.06
       objectReference: {fileID: 0}
     - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       propertyPath: m_Size.z
       value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4670852418452540369, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       propertyPath: m_LocalScale.x
@@ -38765,8 +38773,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.06
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4815852859269261530, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -38784,7 +38791,7 @@ PrefabInstance:
       addedObject: {fileID: 1705513304}
     - targetCorrespondingSourceObject: {fileID: 6000515660659797076, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1705513303}
+      addedObject: {fileID: 1705513310}
   m_SourcePrefab: {fileID: 100100000, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
 --- !u!1 &1705513299 stripped
 GameObject:
@@ -38821,7 +38828,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 1705513302}
   - {fileID: 1705513304}
-  - {fileID: 1705513303}
+  - {fileID: 1705513310}
   - {fileID: 1705513300}
 --- !u!114 &1705513302
 MonoBehaviour:
@@ -38837,21 +38844,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minHeight: {fileID: 630715453}
   maxHeight: {fileID: 694621558}
-  moveSpeed: 5
-  waitTimeAtTop: 1
---- !u!114 &1705513303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705513299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0369d20aabd9c934abb452fa239a392b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dmg: 10
+  moveSpeed: 20
+  waitTimeAtTop: 0.01
 --- !u!114 &1705513304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38896,11 +38890,24 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1705513310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705513299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d17389681879949bb6e3b8d080b05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dmg: 1
 --- !u!1001 &1714694234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43450,8 +43457,16 @@ PrefabInstance:
       value: -3.06
       objectReference: {fileID: 0}
     - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       propertyPath: m_Size.z
       value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772246609879732631, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4670852418452540369, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       propertyPath: m_LocalScale.x
@@ -43552,7 +43567,7 @@ PrefabInstance:
       addedObject: {fileID: 4990239799426983524}
     - targetCorrespondingSourceObject: {fileID: 6000515660659797076, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4990239799426983523}
+      addedObject: {fileID: 4990239799426983530}
   m_SourcePrefab: {fileID: 100100000, guid: 241a44200aceedd40b7626a37c227c62, type: 3}
 --- !u!114 &4990239799426983521 stripped
 MonoBehaviour:
@@ -43565,19 +43580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdefff56ef1397d4c93e75ed6b85fd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4990239799426983523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582400294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0369d20aabd9c934abb452fa239a392b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dmg: 10
 --- !u!114 &4990239799426983524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43622,11 +43624,24 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4990239799426983530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582400294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d17389681879949bb6e3b8d080b05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dmg: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
