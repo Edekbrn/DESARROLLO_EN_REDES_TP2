@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dmg: 40
   _cooldownd: 3
-  Fuerza: 15
+  Fuerza: 40
 --- !u!1 &6972415959234744489
 GameObject:
   m_ObjectHideFlags: 0

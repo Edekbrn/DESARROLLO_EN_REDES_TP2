@@ -14,7 +14,7 @@ public class Granade : NetworkBehaviour
 
     public override void Spawned()
     {
-        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward* Fuerza, ForceMode.Impulse);
+        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward * Fuerza, ForceMode.Impulse);
         if (HasStateAuthority)
         {
             _lifeTimer = TickTimer.CreateFromSeconds(Runner, _cooldownd);
