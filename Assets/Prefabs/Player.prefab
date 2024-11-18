@@ -274,7 +274,7 @@ GameObject:
   m_Layer: 0
   m_Name: Bullet Spawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -286,13 +286,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4279769161829824380}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5027783, y: 0.50233966, z: 0.4976449, w: -0.4972107}
-  m_LocalPosition: {x: -1.5253372, y: -0.15896086, z: 0.19473699}
+  m_LocalRotation: {x: -0.5054461, y: 0.49793878, z: 0.494735, w: -0.50181526}
+  m_LocalPosition: {x: -1.5274682, y: -0.1576205, z: 0.19362071}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5853950694945005544}
-  m_LocalEulerAnglesHint: {x: 0, y: -90.588, z: 269.95}
+  m_LocalEulerAnglesHint: {x: 0.836, y: -90.392, z: 269.973}
 --- !u!1 &6288086772932278102
 GameObject:
   m_ObjectHideFlags: 0
