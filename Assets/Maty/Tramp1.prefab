@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5301079379161916115}
   - component: {fileID: 6726919977632849242}
   - component: {fileID: 2772246609879732631}
-  - component: {fileID: 4815852859269261530}
   m_Layer: 0
   m_Name: Tramp1
   m_TagString: Untagged
@@ -107,27 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.22, y: 3.6, z: 0.71}
   m_Center: {x: 0, y: 0, z: 0.03}
---- !u!95 &4815852859269261530
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6000515660659797076}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d217ea13b39ed041b8b915db4303da1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5152073736739130054
 PrefabInstance:
   m_ObjectHideFlags: 0
