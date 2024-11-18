@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
-public class Trampa : MonoBehaviour
+public class Trampa : NetworkBehaviour
 {
     public Transform minHeight; // Objeto vacío que marca la posición mínima
     public Transform maxHeight; // Objeto vacío que marca la posición máxima
