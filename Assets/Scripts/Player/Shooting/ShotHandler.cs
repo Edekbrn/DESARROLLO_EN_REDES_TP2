@@ -7,6 +7,9 @@ using UnityEngine;
 public class ShotHandler : NetworkBehaviour
 {
     [SerializeField] NetworkPrefabRef _bulletPrefab;
+    [SerializeField] NetworkPrefabRef _granadePrefab;
+
+    [SerializeField] Transform _granadeSpawnTransform;
     [SerializeField] Transform _bulletSpawnTransform;
 
     public event Action OnShot = delegate { };
@@ -20,12 +23,21 @@ public class ShotHandler : NetworkBehaviour
 
         OnShot();
     }
+    public void ThrowGranade()
+    {
+        if (!HasStateAuthority) return;
+        granade();
+    }
 
     void SpawnBullet()
     {
         Runner.Spawn(_bulletPrefab, _bulletSpawnTransform.position, _bulletSpawnTransform.rotation);
     }
 
+    void granade()
+    {
+        Runner.Spawn(_granadePrefab, _granadeSpawnTransform.position, _granadeSpawnTransform.rotation);
+    }
     void RaycastBullet()
     {
         Debug.DrawLine(transform.position, transform.position + transform.forward * 2, Color.green, 2f);
