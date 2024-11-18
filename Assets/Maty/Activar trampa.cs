@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
-public class Activartrampa : MonoBehaviour
+
+public class Activartrampa : NetworkBehaviour
 {
     public GameObject targetObject;
     public float cooldownTime = 5f; // Tiempo de espera antes de reactivar el botón
