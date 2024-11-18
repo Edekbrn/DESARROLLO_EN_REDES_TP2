@@ -289,6 +289,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grenade Particle System
       objectReference: {fileID: 0}
+    - target: {fileID: 320871881074283502, guid: 9abf683641ab9594788235d77e6ffca9, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 320871881074283502, guid: 9abf683641ab9594788235d77e6ffca9, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 320871881074283502, guid: 9abf683641ab9594788235d77e6ffca9, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: -3.494838e-23
+      objectReference: {fileID: 0}
     - target: {fileID: 4961432643437372850, guid: 9abf683641ab9594788235d77e6ffca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

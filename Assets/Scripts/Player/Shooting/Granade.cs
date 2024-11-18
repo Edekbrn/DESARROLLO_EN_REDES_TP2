@@ -14,7 +14,9 @@ public class Granade : NetworkBehaviour
 
     public override void Spawned()
     {
-        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward * Fuerza, ForceMode.VelocityChange);
+        Vector3 fuerzaCombinada = (-transform.right + Vector3.up).normalized * Fuerza;
+        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(fuerzaCombinada, ForceMode.VelocityChange);
+        // GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(Vector3.up * Fuerza, ForceMode.VelocityChange);
 
         if (HasStateAuthority)
         {
