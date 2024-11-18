@@ -11,6 +11,10 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
+    public void LoadStartScene()
+    {
+        SceneManager.LoadScene("start");
+    }
     public void ChangeScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
