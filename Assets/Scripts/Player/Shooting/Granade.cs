@@ -1,5 +1,6 @@
 using Fusion.Addons.Physics;
 using Fusion;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,16 @@ public class Granade : NetworkBehaviour
 {
     [SerializeField] byte _dmg = 40;
     [SerializeField] int _cooldownd = 2;
+    [SerializeField] int _cooldownDestroy = 4;
     [SerializeField] byte Fuerza = 40;
+    [SerializeField] Collider _explosionColl;
+
+
+    public event Action ThrowGranadeA = delegate { };
     TickTimer _lifeTimer = TickTimer.None;
+    TickTimer _lifeTimer2 = TickTimer.None;
+
+
 
     public override void Spawned()
     {
@@ -21,13 +30,28 @@ public class Granade : NetworkBehaviour
         if (HasStateAuthority)
         {
             _lifeTimer = TickTimer.CreateFromSeconds(Runner, _cooldownd);
+            _lifeTimer2 = TickTimer.CreateFromSeconds(Runner, _cooldownDestroy);
         }
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (!_lifeTimer.Expired(Runner)) return;
-        DespawnObject();
+        if (HasStateAuthority)
+        {
+            if (_lifeTimer.Expired(Runner) && !_explosionColl.enabled)
+            {
+                _explosionColl.enabled = true;
+            }
+
+            if (_lifeTimer2.Expired(Runner))
+            {
+                DespawnObject();
+            }
+        }
+        // if (!_lifeTimer.Expired(Runner)) return;
+        // _explosionColl.enabled = true;
+        // if (!_lifeTimer2.Expired(Runner)) return;
+        // DespawnObject();
     }
 
     void DespawnObject()
@@ -39,12 +63,18 @@ public class Granade : NetworkBehaviour
     {
         if (!Object || !HasStateAuthority) return;
 
-        if (other.TryGetComponent(out LifeHandler player))
+        if (other.TryGetComponent(out LifeHandler player)|| _explosionColl.enabled==true)
         {
-            
-            player.TakeDamage(_dmg);
-        }
 
+            player.TakeDamage(_dmg);
+            explosion();
+            _explosionColl.enabled = false;
+        }
+    }
+    void explosion()
+    {
+        ThrowGranadeA();
+        _explosionColl.enabled = false;
         DespawnObject();
     }
 }
