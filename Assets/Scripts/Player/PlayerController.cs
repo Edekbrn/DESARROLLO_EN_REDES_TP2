@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(NetworkCharacterControllerCustom))]
@@ -10,6 +11,9 @@ public class PlayerController : NetworkBehaviour
 {
     NetworkCharacterControllerCustom _movementHandler;
     ShotHandler _shotHandler;
+    private bool _canThrowGranade = true;
+    [SerializeField] int _cooldowndGranade = 2;
+    TickTimer _lifeTimer = TickTimer.None;
 
     public override void Spawned()
     {
@@ -50,9 +54,28 @@ public class PlayerController : NetworkBehaviour
         }
 
         //Granada
-        if (inputs.isgranade)
+        if (inputs.isgranade && _canThrowGranade)
         {
-            _shotHandler.ThrowGranade();
+            ThrowGranadeWithCooldown();
+           // _shotHandler.ThrowGranade();
         }
+    }
+    private void ThrowGranadeWithCooldown()
+    {
+        _canThrowGranade = false;
+        _shotHandler.ThrowGranade();
+        _lifeTimer = TickTimer.CreateFromSeconds(Runner, _cooldowndGranade);
+
+        StartCoroutine(ResetGranadeCooldown());
+    }
+
+    private IEnumerator ResetGranadeCooldown()
+    {
+        while (!_lifeTimer.Expired(Runner))
+        {
+            yield return null;
+        }
+
+        _canThrowGranade = true;
     }
 }
