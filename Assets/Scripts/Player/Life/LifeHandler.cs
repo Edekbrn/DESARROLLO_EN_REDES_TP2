@@ -1,7 +1,6 @@
 using Fusion;
 using System.Collections;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LifeHandler : NetworkBehaviour
@@ -33,10 +32,8 @@ public class LifeHandler : NetworkBehaviour
         else
         {
             CurrentLifeChanged();
-
             DeadStateChanged();
         }
-
     }
 
     public void TakeDamage(byte dmg)
@@ -66,7 +63,6 @@ public class LifeHandler : NetworkBehaviour
     IEnumerator Server_ResurrectCooldown()
     {
         yield return new WaitForSeconds(2);
-
         Server_Resurrect();
     }
 
@@ -96,10 +92,46 @@ public class LifeHandler : NetworkBehaviour
         }
 
         Runner.Despawn(Object);
+        Death();
     }
+
+    void Death()
+    {
+        if (_maxDeaths == 0)
+        {
+            GameManager.Instance.Defeat();
+        }
+        else
+        {
+            if (Runner.LocalPlayer != Object.InputAuthority)
+            {
+                RPC_Win(Object.InputAuthority);
+            }
+        }
+
+        Runner.Despawn(Object);
+    }
+
+
+    [Rpc]
+    public void RPC_Win(PlayerRef playerRef)
+    {
+        if (playerRef == Runner.LocalPlayer)
+        {
+            Debug.Log("You Win!");
+            GameManager.Instance.TriggerWin();
+        }
+        else
+        {
+            Debug.Log("You Lose");
+        }
+    }
+
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         OnDespawn();
     }
 }
+
+

@@ -35,9 +35,9 @@ RectTransform:
   - {fileID: 1444822971517366841}
   m_Father: {fileID: 6909307245688801282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.19600001, y: 0.14186916}
-  m_AnchorMax: {x: 0.39000002, y: 0.23111115}
-  m_AnchoredPosition: {x: 418.3, y: 0}
+  m_AnchorMin: {x: 0.59756255, y: 0.13353582}
+  m_AnchorMax: {x: 0.7826458, y: 0.23111115}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7938853926089545767
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.05
+  m_fontSize: 59.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 6909307245936779076}
   - component: {fileID: 2569443809728516452}
   m_Layer: 5
-  m_Name: YOULOSE
+  m_Name: Canvas_Defeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80.45
+  m_fontSize: 160.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.15
+  m_fontSize: 83.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
