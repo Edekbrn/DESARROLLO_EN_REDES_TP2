@@ -7,7 +7,6 @@ public class PlayerView : NetworkBehaviour
 {
     [SerializeField] GameObject _visualMesh;
     [SerializeField] ParticleSystem _shotParticles;
-
     NetworkMecanimAnimator _mecanimAnimator;
 
     [Networked, OnChangedRender(nameof(ShowShotParticles))]
@@ -27,6 +26,7 @@ public class PlayerView : NetworkBehaviour
         {
             shotComponent.OnShot += () => { Firing = !Firing; };
         }
+        
 
         _mecanimAnimator = GetComponent<NetworkMecanimAnimator>();
 
@@ -50,7 +50,6 @@ public class PlayerView : NetworkBehaviour
     {
         _shotParticles.Play();
     }
-
     void ShowMesh(bool isDead)
     {
         _visualMesh.SetActive(!isDead);

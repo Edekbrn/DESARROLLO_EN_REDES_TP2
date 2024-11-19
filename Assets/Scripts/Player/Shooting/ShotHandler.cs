@@ -12,6 +12,8 @@ public class ShotHandler : NetworkBehaviour
     [SerializeField] Transform _granadeSpawnTransform;
     [SerializeField] Transform _bulletSpawnTransform;
 
+    public event Action ThrowGranadeA = delegate { };
+
     public event Action OnShot = delegate { };
     public void Fire()
     {
@@ -28,6 +30,7 @@ public class ShotHandler : NetworkBehaviour
     {
         if (!HasStateAuthority) return;
         granade();
+        ThrowGranadeA();
     }
 
     void SpawnBullet()

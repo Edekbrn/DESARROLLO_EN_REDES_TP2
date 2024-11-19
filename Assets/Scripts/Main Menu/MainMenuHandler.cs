@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class MainMenuHandler : MonoBehaviour
 {
+
     [SerializeField] NetworkRunnerHandler _networkRunnerHandler;
 
     [Header("Panels")]
@@ -62,5 +64,7 @@ public class MainMenuHandler : MonoBehaviour
         _hostGameBtn.interactable = false;
 
         _networkRunnerHandler.HostGame(_sessionNameField.text, "Game");
+       // WaitingPlayers.Contenedor(_sessionNameField.text);
+       //_networkRunnerHandler.HostGame(_sessionNameField.text, "WaitingPlayers");
     }
 }
