@@ -7,19 +7,21 @@ using Fusion;
 public class Activartrampa : NetworkBehaviour
 {
     public GameObject targetObject;
-    public float cooldownTime = 5f; // Tiempo de espera antes de reactivar el botón
-    private bool isTrapActive = false; // Estado de la trampa
-    private bool isButtonActive = true; // Estado del botón
+    public float cooldownTime = 5f; 
+    private bool isTrapActive = false; 
+    private bool isButtonActive = true;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!HasStateAuthority) return;
+
         if (other.CompareTag("Player") && isButtonActive)
         {
             if (!isTrapActive)
             {
                 print("ActivoTrampa1");
                 isTrapActive = true;
-                isButtonActive = false; // Desactivar el botón
+                isButtonActive = false;
                 if (targetObject != null)
                 {
                     print("ActivoTrampa2");
@@ -30,7 +32,7 @@ public class Activartrampa : NetworkBehaviour
                         print("ActivoTrampa3");
                     }
                 }
-                StartCoroutine(ReactivateButton()); // Reactivar el botón tras un tiempo
+                StartCoroutine(ReactivateButton()); 
                 print("ActivoTrampaReseteo");
             }
         }
@@ -40,6 +42,6 @@ public class Activartrampa : NetworkBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
         isTrapActive = false;
-        isButtonActive = true; // Reactivar el botón
+        isButtonActive = true;
     }
 }
