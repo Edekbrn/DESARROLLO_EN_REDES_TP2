@@ -13,11 +13,13 @@ public class MainMenuHandler : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject _initialPanel;
     [SerializeField] GameObject _statusPanel;
+    [SerializeField] GameObject _ErrorJoinLobbyPanel;
     [SerializeField] GameObject _sessionBrowserPanel;
     [SerializeField] GameObject _hostGamePanel;
 
     [Header("Buttons")]
     [SerializeField] Button _joinLobbyBtn;
+    [SerializeField] Button _ErrorJoinLobby;
     [SerializeField] Button _goToHostPanelBtn;
     [SerializeField] Button _hostGameBtn;
 
@@ -31,6 +33,7 @@ public class MainMenuHandler : MonoBehaviour
     private void Start()
     {
         _joinLobbyBtn.onClick.AddListener(Btn_JoinLobby);
+        _ErrorJoinLobby.onClick.AddListener(BTN_ReturnToInitialPanel);
         _goToHostPanelBtn.onClick.AddListener(Btn_GoToHostPanel);
         _hostGameBtn.onClick.AddListener(Btn_HostGame);
 
@@ -39,7 +42,13 @@ public class MainMenuHandler : MonoBehaviour
             _statusPanel.SetActive(false);
             _sessionBrowserPanel.SetActive(true);
         };
+
+        _networkRunnerHandler.OnErrorToJoinLobby += () =>
+        {
+            _ErrorJoinLobbyPanel.SetActive(true);
+        } ;
     }
+    
 
     void Btn_JoinLobby()
     {
@@ -51,6 +60,14 @@ public class MainMenuHandler : MonoBehaviour
         PlayerPrefs.SetString("Nickname", _nicknameField.text);
         
         _statusText.text = "Joining Lobby...";
+    }
+
+    void BTN_ReturnToInitialPanel()
+    {
+        _ErrorJoinLobbyPanel.SetActive(false);
+        _statusPanel.SetActive(false);
+        _initialPanel.SetActive(true);
+
     }
 
     void Btn_GoToHostPanel()

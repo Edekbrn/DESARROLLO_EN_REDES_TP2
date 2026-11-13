@@ -13,6 +13,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     NetworkRunner _currentRunner;
 
     public event Action OnJoinedLobby = delegate { };
+    public event Action OnErrorToJoinLobby = delegate { };
     public event Action<List<SessionInfo>> OnSessionListUpdate = delegate { };
 
     public void JoinLobby()
@@ -34,6 +35,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
         if (!result.Ok)
         {
             Debug.LogError("[Custom Error] Unable to Join Lobby");
+            OnErrorToJoinLobby();
         }
         else
         {
