@@ -80,7 +80,8 @@ public class MainMenuHandler : MonoBehaviour
     {
         _hostGameBtn.interactable = false;
 
-        _networkRunnerHandler.HostGame(_sessionNameField.text, "Game");
+        //_networkRunnerHandler.HostGame(_sessionNameField.text, "Game");
+        _networkRunnerHandler.HostGame(_sessionNameField.text, "Lobby");
        // WaitingPlayers.Contenedor(_sessionNameField.text);
        //_networkRunnerHandler.HostGame(_sessionNameField.text, "WaitingPlayers");
     }

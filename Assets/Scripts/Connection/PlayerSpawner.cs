@@ -10,10 +10,10 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] NetworkPrefabRef _playerPrefab;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) 
     {
-        if (runner.IsServer)
-        {
-            runner.Spawn(_playerPrefab, null, null, player);
-        }
+        //if (runner.IsServer)
+        //{
+        //    runner.Spawn(_playerPrefab, null, null, player);
+        //}
     }
 
 
