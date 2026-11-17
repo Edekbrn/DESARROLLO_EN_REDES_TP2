@@ -650,7 +650,7 @@ MonoBehaviour:
   _toggleReadyButton: {fileID: 71666522}
   _startGameButton: {fileID: 1514873834}
   _LeaveRoomButton: {fileID: 1030721639}
-  _GameSceneName: 
+  _GameSceneName: Game
 --- !u!1 &399564064
 GameObject:
   m_ObjectHideFlags: 0

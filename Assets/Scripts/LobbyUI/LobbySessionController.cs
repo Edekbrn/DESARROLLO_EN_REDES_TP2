@@ -55,7 +55,9 @@ public class LobbySessionController : NetworkBehaviour, IPlayerLeft, IStateAutho
     {
         var data = new LobbyPlayerData()
         {
-            PlayerName = "Boliviano", // VER
+            PlayerName = PlayerPrefs.GetString("Nickname"), // VER
+
+            //PlayerName = "Boliviano", // VER
             IsReady = false
         };
 
@@ -63,22 +65,31 @@ public class LobbySessionController : NetworkBehaviour, IPlayerLeft, IStateAutho
         UpdatStartGameButton();
         OnPlayerDataChanged();
     }
+    private PlayerRef ResolveSource(RpcInfo info)
+        => info.Source.IsNone ? Runner.LocalPlayer : info.Source;
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     private void RPC_SetPlayerData(LobbyPlayerData data, RpcInfo info = default)
     {
-        if(_PlayerData.ContainsKey(info.Source))
-            _PlayerData.Set(info.Source, data);
+        var source = ResolveSource(info);
+        data.IsHost = source == Runner.LocalPlayer;
+
+        if (_PlayerData.ContainsKey(source))
+            _PlayerData.Set(source, data);
         else
-            _PlayerData.Add(info.Source, data);
+            _PlayerData.Add(source, data);
     }
+
+    
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     private void RPC_ToggleReadyState(RpcInfo info = default)
     {
-        if(_PlayerData.TryGet(info.Source, out LobbyPlayerData data))
+        var source = ResolveSource(info);
+
+        if (_PlayerData.TryGet(source, out LobbyPlayerData data))
         {
             data.IsReady = !data.IsReady;
-            _PlayerData.Set(info.Source, data);
+            _PlayerData.Set(source, data);
         }
 
     }
@@ -97,7 +108,8 @@ public class LobbySessionController : NetworkBehaviour, IPlayerLeft, IStateAutho
             if(!entry.Value.IsReady) return false;
         }
 
-        return _PlayerData.Count > 0;
+
+        return _PlayerData.Count > 1;
 
     }
 
@@ -137,7 +149,9 @@ public class LobbySessionController : NetworkBehaviour, IPlayerLeft, IStateAutho
             {
                 var value = _reusablePlayerSortList[i].Value;
                 var isLocalPlayer = _reusablePlayerSortList[i].Key == Runner.LocalPlayer;
-                _uiPlayerElements[i].SetPlayerState(value.PlayerName.Value, value.IsReady, isLocalPlayer);
+                var isHost = value.IsHost;
+
+                _uiPlayerElements[i].SetPlayerState(value.PlayerName.Value, value.IsReady, isLocalPlayer, isHost);
                 _uiPlayerElements[i].gameObject.SetActive(true);
             } else _uiPlayerElements[i].gameObject.SetActive(false);
         }
