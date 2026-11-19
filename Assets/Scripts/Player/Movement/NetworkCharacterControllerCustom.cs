@@ -8,41 +8,53 @@ public class NetworkCharacterControllerCustom : NetworkCharacterController
 {
     public event Action<float> OnMovement = delegate { };
 
+    [Header("Feel")]
+    [Tooltip("Aceleración al invertir la dirección (más alta = giro más seco)")]
+    public float turnAcceleration = 100f;
+    [Range(0f, 1f)] public float airControl = 0.5f;
     public override void Move(Vector3 direction)
     {
         var deltaTime = Runner.DeltaTime;
         var previousPos = transform.position;
-        var moveVelocity = Velocity;
+        var velocity = Velocity;
 
-        direction = direction.normalized;
+        // Tu eje de movimiento: input Z -> eje X del mundo
+        float input = Mathf.Clamp(direction.z, -1f, 1f);
 
-        if (Grounded && moveVelocity.y < 0)
-        {
-            moveVelocity.y = 0f;
-        }
+        // Gravedad
+        if (Grounded && velocity.y < 0f) velocity.y = 0f;
+        velocity.y += gravity * deltaTime;
 
-        moveVelocity.y += gravity * Runner.DeltaTime;
+        // Horizontal
+        float target = input * maxSpeed;
+        float vx = velocity.x;
 
-        var horizontalVel = default(Vector3);
-        horizontalVel.z = moveVelocity.x;
-
-        if (direction == default)
-        {
-            horizontalVel = Vector3.Lerp(horizontalVel, default, braking * deltaTime);
-        }
+        float rate;
+        if (Mathf.Approximately(input, 0f))
+            rate = braking;
+        else if (Mathf.Abs(vx) > 0.01f && Mathf.Sign(input) != Mathf.Sign(vx))
+            rate = turnAcceleration;
         else
+            rate = acceleration;
+
+        if (!Grounded) rate *= airControl;
+
+        velocity.x = Mathf.MoveTowards(vx, target, rate * deltaTime);
+        velocity.z = 0f;
+
+        // Rotación suave
+        if (!Mathf.Approximately(input, 0f))
         {
-            horizontalVel = Vector3.ClampMagnitude(horizontalVel + direction * acceleration * deltaTime, maxSpeed);
-            transform.rotation = Quaternion.Euler(Vector3.up * (Mathf.Sign(direction.z) < 0 ? -90 : 90));
+            var targetRot = Quaternion.Euler(0f, input > 0f ? 90f : -90f, 0f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * deltaTime);
         }
 
-        moveVelocity.x = horizontalVel.z;
+        Controller.Move(velocity * deltaTime);
 
-        Controller.Move(moveVelocity * deltaTime);
-
+        // Velocidad real tras colisiones: si chocas con una pared, vuelve a 0 sola
         Velocity = (transform.position - previousPos) * Runner.TickRate;
         Grounded = Controller.isGrounded;
 
-        OnMovement(direction.z);
+        OnMovement(input);
     }
 }
