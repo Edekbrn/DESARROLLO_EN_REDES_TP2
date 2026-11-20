@@ -15,6 +15,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] int _cooldowndGranade = 2;
     TickTimer _lifeTimer = TickTimer.None;
 
+        [SerializeField] Transform aimPivot; // un empty a la altura del pecho, hijo del root
+
+    [Networked] public Vector3 AimPoint { get; set; }   // nuevo
+
     public override void Spawned()
     {
         _movementHandler = GetComponent<NetworkCharacterControllerCustom>();
@@ -41,6 +45,13 @@ public class PlayerController : NetworkBehaviour
         var direction = Vector3.forward * inputs.movementInput;
         _movementHandler.Move(direction);
 
+        
+        AimPoint = inputs.MousePosition;
+                float dirX = AimPoint.x - aimPivot.position.x;
+        if (Mathf.Abs(dirX) > 0.05f)
+            transform.rotation = Quaternion.Euler(0f, dirX >= 0f ? 90f : -90f, 0f);
+
+
         //Disparo
         if (inputs.isFirePressed)
         {
@@ -58,7 +69,7 @@ public class PlayerController : NetworkBehaviour
         {
             ThrowGranadeWithCooldown();
            // _shotHandler.ThrowGranade();
-        }
+        } 
     }
     private void ThrowGranadeWithCooldown()
     {

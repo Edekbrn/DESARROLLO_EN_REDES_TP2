@@ -13,6 +13,7 @@ public class GameManager : NetworkBehaviour
 
     [Header("Player Spawns")]
     [SerializeField] NetworkPrefabRef _playerPrefab;
+    [SerializeField] GameObject _spawns;
     readonly Dictionary<PlayerRef, NetworkObject> _playersInGame = new();
 
 
@@ -45,7 +46,7 @@ public class GameManager : NetworkBehaviour
 
         //var point = spawnPoints[index % spawnPoints.Length];
         //var obj = runner.Spawn(playerPrefab, point.position, point.rotation, inputAuthority: player);
-        var obj = runner.Spawn(_playerPrefab, null, null, inputAuthority: player);
+        var obj = runner.Spawn(_playerPrefab, _spawns.transform.position, _spawns.transform.rotation, inputAuthority: player);
         runner.SetPlayerObject(player, null);
         _playersInGame[player] = obj;
     }

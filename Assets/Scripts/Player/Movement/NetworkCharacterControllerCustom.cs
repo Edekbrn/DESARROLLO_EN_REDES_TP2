@@ -43,11 +43,11 @@ public class NetworkCharacterControllerCustom : NetworkCharacterController
         velocity.z = 0f;
 
         // Rotación suave
-        if (!Mathf.Approximately(input, 0f))
-        {
-            var targetRot = Quaternion.Euler(0f, input > 0f ? 90f : -90f, 0f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * deltaTime);
-        }
+        //if (!Mathf.Approximately(input, 0f))
+        //{
+        //    var targetRot = Quaternion.Euler(0f, input > 0f ? 90f : -90f, 0f);
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * deltaTime);
+        //}
 
         Controller.Move(velocity * deltaTime);
 
