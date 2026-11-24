@@ -11,6 +11,7 @@ public class PlayerController : NetworkBehaviour
 {
     NetworkCharacterControllerCustom _movementHandler;
     ShotHandler _shotHandler;
+    PlayerWeaponControl _PlayerWeapon;
     private bool _canThrowGranade = true;
     [SerializeField] int _cooldowndGranade = 2;
     TickTimer _lifeTimer = TickTimer.None;
@@ -22,6 +23,7 @@ public class PlayerController : NetworkBehaviour
     public override void Spawned()
     {
         _movementHandler = GetComponent<NetworkCharacterControllerCustom>();
+        _PlayerWeapon = GetComponent<PlayerWeaponControl>();
         _shotHandler = GetComponent<ShotHandler>();
 
         var lifeHandler = GetComponent<LifeHandler>();
@@ -55,7 +57,7 @@ public class PlayerController : NetworkBehaviour
         //Disparo
         if (inputs.isFirePressed)
         {
-            _shotHandler.Fire();
+            _PlayerWeapon.Shoot();
         }
 
         //Salto

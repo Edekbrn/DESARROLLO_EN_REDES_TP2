@@ -25,7 +25,7 @@ public class LifeHandler : NetworkBehaviour
     bool _HasLimitedLives;
     int _CurrentLive;
     int _MaxLives;
-    [Networked] public NetworkBool NoLives { get; set; }
+    [Networked] public NetworkBool NoLives { get; private set; }
 
     public override void Spawned()
     {
@@ -44,6 +44,7 @@ public class LifeHandler : NetworkBehaviour
 
     public void SetLives(int count)
     {
+        NoLives = false;
         _HasLimitedLives = true;
         _MaxLives = count;
         _CurrentLive = _MaxLives;

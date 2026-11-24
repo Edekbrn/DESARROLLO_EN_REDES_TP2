@@ -26,10 +26,9 @@ public class LocalInputs : MonoBehaviour
     {
         _inputData.movementInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _isFirePressed = true;
-        }
+
+        _isFirePressed = Input.GetMouseButton(0);
+        
 
         if (Input.GetKeyDown(KeyCode.G))
         {
