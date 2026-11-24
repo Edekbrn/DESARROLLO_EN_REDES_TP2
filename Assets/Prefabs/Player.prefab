@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 5853950694935983328}
-  TotalWords: 2
+  TotalWords: 3
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 000000008a18fce4b9abd9d3
@@ -610,6 +610,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5853950694935983328}
   controller: {fileID: 8978342035082928251}
-  bodyWeight: 0.8
+  bodyWeight: 1
   headWeight: 0.3
   smoothing: 20

@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DESARROLLO_EN_REDES_TP2.slnx"
+    "dotnet.defaultSolution": "DESARROLLO_EN_REDES_TP2.slnx",
+    "dotnet.preferCSharpExtension": true
 }

@@ -21,6 +21,12 @@ public class LifeHandler : NetworkBehaviour
     public event Action OnResurrect = delegate { };
     public event Action OnDespawn = delegate { };
 
+
+    bool _HasLimitedLives;
+    int _CurrentLive;
+    int _MaxLives;
+    [Networked] public NetworkBool NoLives { get; set; }
+
     public override void Spawned()
     {
         _lifeBarItem = LifeBarHandler.Instance.CreateNewLifeBarItem(this);
@@ -36,6 +42,14 @@ public class LifeHandler : NetworkBehaviour
         }
     }
 
+    public void SetLives(int count)
+    {
+        _HasLimitedLives = true;
+        _MaxLives = count;
+        _CurrentLive = _MaxLives;
+        
+    }
+
     public void TakeDamage(byte dmg)
     {
         if (IsDead) return;
@@ -48,12 +62,17 @@ public class LifeHandler : NetworkBehaviour
 
         if (CurrentLife > 0) return;
 
-        _maxDeaths--;
-
-        if (_maxDeaths == 0)
+        if(_HasLimitedLives)
         {
-            DisconnectPlayer();
-            return;
+            _CurrentLive--;
+            if(_CurrentLive <= 0)
+            {
+                NoLives = true;
+                GameManager.Instance.LivesMode_OnPlayerEliminated(Object.InputAuthority);
+                //Runner.Disconnect(Object.InputAuthority);
+                Runner.Despawn(Object);
+                return;
+            }
         }
 
         IsDead = true;
@@ -84,17 +103,31 @@ public class LifeHandler : NetworkBehaviour
         _lifeBarItem.UpdateFillAmount(CurrentLife / (float)MAX_LIFE);
     }
 
-    void DisconnectPlayer()
+    
+    void EliminatePlayer()
     {
         if (!Object.HasInputAuthority)
         {
             Runner.Disconnect(Object.InputAuthority);
         }
 
+
+        // Mandar esto a gamemanager
         Runner.Despawn(Object);
         Death();
     }
 
+
+    // Improve
+    void DisconnectPlayer()
+    {
+
+        Runner.Despawn(Object);
+        Death();
+    }
+
+
+    // CHECK
     void Death()
     {
         if (_maxDeaths == 0)
@@ -113,6 +146,8 @@ public class LifeHandler : NetworkBehaviour
     }
 
 
+
+    // CHECK
     [Rpc]
     public void RPC_Win(PlayerRef playerRef)
     {
