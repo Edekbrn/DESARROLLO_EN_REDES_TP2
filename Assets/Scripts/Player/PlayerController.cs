@@ -57,7 +57,7 @@ public class PlayerController : NetworkBehaviour
         //Disparo
         if (inputs.isFirePressed)
         {
-            _PlayerWeapon.Shoot();
+            _PlayerWeapon.Shoot(AimPoint);
         }
 
         //Salto

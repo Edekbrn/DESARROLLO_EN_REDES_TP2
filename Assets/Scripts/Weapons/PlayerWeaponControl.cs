@@ -20,16 +20,11 @@ public class PlayerWeaponControl : NetworkBehaviour
         
     }
 
-    void Update()
-    {
-        
-    }
-
-    public void Shoot()
+    public void Shoot(Vector3 AimPoint)
     {
         if(_CurrentWeapon != null)
         {
-            _CurrentWeapon.Shoot();
+            _CurrentWeapon.Shoot(AimPoint);
             if(_CurrentWeapon.AmmunitionIsOver())
             {
                 // Despawn Object.
@@ -39,7 +34,7 @@ public class PlayerWeaponControl : NetworkBehaviour
             return;
         }
 
-        DefaultWeapon.Shoot();
+        DefaultWeapon.Shoot(AimPoint);
 
     }
 

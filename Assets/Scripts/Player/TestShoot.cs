@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestShoot : NetworkBehaviour
+public class PlayerAim : NetworkBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] PlayerController controller;   // antes era PlayerAim

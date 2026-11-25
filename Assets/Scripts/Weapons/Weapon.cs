@@ -26,8 +26,8 @@ public class Weapon : NetworkBehaviour
         if(_CurrentTime < _WeaponInfo.FireRate) _CurrentTime += Time.deltaTime;
     }
 
-
-    public void Shoot()
+    // Vector3 = controller.AimPoint 
+    public void Shoot(Vector3 aimPoint)
     {
         if(_CurrentTime < _WeaponInfo.FireRate) return;
 
@@ -36,11 +36,22 @@ public class Weapon : NetworkBehaviour
         if(!_WeaponInfo.UnlimitedAmmo) 
             _CurrentAmmunition--;
 
+        // Dirección precisa: de la punta del arma al mouse
+        Vector3 dir = aimPoint - _BulletSpawn.position;
+        dir.z = 0f;                                   // mantener la bala en el plano 2.5D
+
+        // Si el mouse está encima de la punta del arma, usa hacia donde mira el arma
+        if (dir.sqrMagnitude < 0.01f)
+            dir = _BulletSpawn.forward;
+
+        dir.Normalize();
+
+        // Dispersión opcional sobre la dirección ya apuntada
         float angle = Random.Range(-_WeaponInfo.SpreadAngle, _WeaponInfo.SpreadAngle);
-        Quaternion spreadRot = Quaternion.AngleAxis(angle, Vector3.forward) * _BulletSpawn.rotation;
+        dir = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
 
+        Runner.Spawn(_WeaponInfo.BulletToSpawn, _BulletSpawn.position, Quaternion.LookRotation(dir));
 
-        Runner.Spawn(_WeaponInfo.BulletToSpawn, _BulletSpawn.position, spreadRot);
     }
 
     public bool AmmunitionIsOver() => _CurrentAmmunition <= 0;

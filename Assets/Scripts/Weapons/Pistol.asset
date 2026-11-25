@@ -15,9 +15,7 @@ MonoBehaviour:
   Damage: 10
   FireRate: 0.1
   MaxAmmunition: 0
+  SpreadAngle: 3
   UnlimitedAmmo: 1
   BulletToSpawn:
     RawGuidValue: de6902587dbe2364f95155e1b4e49d71
-  Snappiness: 0
-  ReturnSpeed: 0
-  Recoil: {x: 0, y: 0}
